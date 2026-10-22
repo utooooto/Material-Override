@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh-Hant\n"
+
+msgid "language"
+msgstr "語言"
+
+msgid "source"
+msgstr "來源材質"
+
+msgid "target"
+msgstr "目標材質"
+
+msgid "same_material"
+msgstr "來源與目標是同一個材質。"
+
+msgid "shader_differs"
+msgstr "Shader 不同。\n來源：{0}\n目標：{1}\n兩邊 shader 都有的屬性照常轉移。目標 shader 沒有的屬性（滑鼠停留可見提示）只能和「Shader」列一起轉移，轉移後結果會改用來源的 shader。"
+
+msgid "tip_not_in_target"
+msgstr "目標 shader 沒有此屬性：只能和「Shader」列一起轉移。"
+
+msgid "row_shader"
+msgstr "Shader"
+
+msgid "row_queue"
+msgstr "Render Queue"
+
+msgid "kind_shader"
+msgstr "Shader"
+
+msgid "kind_queue"
+msgstr "Render Queue"
+
+msgid "none"
+msgstr "(無)"
+
+msgid "only_textures"
+msgstr "只顯示貼圖"
+
+msgid "only_diff"
+msgstr "只顯示有差異"
+
+msgid "show_hidden"
+msgstr "顯示隱藏屬性"
+
+msgid "search"
+msgstr "搜尋"
+
+msgid "select_all_visible"
+msgstr "全選（目前顯示）"
+
+msgid "select_none_visible"
+msgstr "全不選（目前顯示）"
+
+msgid "select_empty_tex"
+msgstr "只選：來源有、目標沒有的貼圖"
+
+msgid "expand_all"
+msgstr "全部展開"
+
+msgid "collapse_all"
+msgstr "全部收合"
+
+msgid "col_property"
+msgstr "屬性"
+
+msgid "col_source"
+msgstr "來源"
+
+msgid "col_target"
+msgstr "目標"
+
+msgid "group_all"
+msgstr "全選"
+
+msgid "group_none"
+msgstr "全不選"
+
+msgid "group_header"
+msgstr "{0}  (差異 {1} / 已選 {2} / 顯示 {3})"
+
+msgid "no_rows"
+msgstr "目前篩選條件下沒有屬性。"
+
+msgid "using_fallback"
+msgstr "讀不到已安裝的 lilToon 原始碼，改用內建分組表。"
+
+msgid "kind_texture"
+msgstr "貼圖"
+
+msgid "kind_color"
+msgstr "顏色"
+
+msgid "kind_vector"
+msgstr "向量"
+
+msgid "kind_number"
+msgstr "數值"
+
+msgid "apply"
+msgstr "套用已勾選的 {0} 個屬性並關閉（含目前被篩選隱藏的）"
+
+msgid "log_done"
+msgstr "[Material Override] 已轉移 {0} 個屬性到 {1}"
+
+msgid "win_no_component"
+msgstr "請從 Material Override 元件開啟此視窗。"
+
+msgid "win_pick_source"
+msgstr "請先在上方指定來源材質。"
+
+msgid "win_pick_target"
+msgstr "這個材質槽沒有材質可供轉移。"
+
+msgid "insp_slot"
+msgstr "材質槽"
+
+msgid "insp_slot_option"
+msgstr "{0}：{1}"
+
+msgid "insp_transfer"
+msgstr "從其他材質轉移..."
+
+msgid "insp_no_renderer"
+msgstr "請把此元件放在有 Renderer 的 GameObject 上。"
+
+msgid "insp_no_target"
+msgstr "選取的材質槽沒有材質。"
+
+msgid "insp_overrides"
+msgstr "覆寫：{0}"
+
+msgid "insp_clear"
+msgstr "清除所有覆寫"
+
+msgid "insp_missing_props"
+msgstr "有 {0} 筆覆寫的屬性在目前的 shader 上不存在，會被略過：{1}\n可以在下方清單移除，也可以忽略。"
+
+msgid "insp_revert_tip"
+msgstr "移除此覆寫（回到目標材質的值）"
+
+msgid "insp_kw_on"
+msgstr "keyword：開"
+
+msgid "insp_kw_off"
+msgstr "keyword：關"
+
+msgid "insp_result"
+msgstr "結果（建置時使用的最終狀態）"
+
+msgid "insp_slot_in_use"
+msgstr "  （已被使用）"
+
+msgid "insp_slot_conflict"
+msgstr "這個物件上排在前面的 Material Override 已經修改此材質槽。每個材質槽只允許一個，所以這個元件不會生效。請改選其他材質槽或移除它。建置會報錯。"
+
+msgid "err_missing_props"
+msgstr "Material Override：材質槽 {0} 有 {1} 筆覆寫的屬性在 shader 上不存在，已略過：{2}"
+
+msgid "err_no_renderer"
+msgstr "Material Override：此 GameObject 上沒有 Renderer，已略過。"
+
+msgid "err_slot_out_of_range"
+msgstr "Material Override：材質槽 {0} 不存在（Renderer 只有 {1} 個材質槽），已略過。"
+
+msgid "err_slot_empty"
+msgstr "Material Override：材質槽 {0} 沒有材質，或此元件尚未設定，已略過。"
+
+msgid "err_slot_conflict"
+msgstr "Material Override：此物件上排在前面的 Material Override 已經修改材質槽 {0}，這個元件未套用。每個材質槽只能保留一個。"
+

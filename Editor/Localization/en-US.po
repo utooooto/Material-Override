@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en-US\n"
+
+msgid "language"
+msgstr "Language"
+
+msgid "source"
+msgstr "Source Material"
+
+msgid "target"
+msgstr "Target Material"
+
+msgid "same_material"
+msgstr "Source and target are the same material."
+
+msgid "shader_differs"
+msgstr "The shaders differ.\nSource: {0}\nTarget: {1}\nProperties that exist in both shaders can be transferred as usual. Properties the target shader lacks (marked in the tooltip) are only transferred together with the Shader row, which makes the result use the source shader."
+
+msgid "tip_not_in_target"
+msgstr "Not in the target shader: transferred only together with the Shader row."
+
+msgid "row_shader"
+msgstr "Shader"
+
+msgid "row_queue"
+msgstr "Render Queue"
+
+msgid "kind_shader"
+msgstr "Shader"
+
+msgid "kind_queue"
+msgstr "Render Queue"
+
+msgid "none"
+msgstr "(none)"
+
+msgid "only_textures"
+msgstr "Textures only"
+
+msgid "only_diff"
+msgstr "Differences only"
+
+msgid "show_hidden"
+msgstr "Show hidden properties"
+
+msgid "search"
+msgstr "Search"
+
+msgid "select_all_visible"
+msgstr "Select all (visible)"
+
+msgid "select_none_visible"
+msgstr "Select none (visible)"
+
+msgid "select_empty_tex"
+msgstr "Select only textures the source has and the target lacks"
+
+msgid "expand_all"
+msgstr "Expand all"
+
+msgid "collapse_all"
+msgstr "Collapse all"
+
+msgid "col_property"
+msgstr "Property"
+
+msgid "col_source"
+msgstr "Source"
+
+msgid "col_target"
+msgstr "Target"
+
+msgid "group_all"
+msgstr "All"
+
+msgid "group_none"
+msgstr "None"
+
+msgid "group_header"
+msgstr "{0}  (diff {1} / selected {2} / shown {3})"
+
+msgid "no_rows"
+msgstr "No properties match the current filters."
+
+msgid "using_fallback"
+msgstr "Could not read the installed lilToon source; using the built-in group table."
+
+msgid "kind_texture"
+msgstr "Texture"
+
+msgid "kind_color"
+msgstr "Color"
+
+msgid "kind_vector"
+msgstr "Vector"
+
+msgid "kind_number"
+msgstr "Number"
+
+msgid "apply"
+msgstr "Apply {0} selected properties and close (including any hidden by filters)"
+
+msgid "log_done"
+msgstr "[Material Override] Transferred {0} properties to {1}"
+
+msgid "win_no_component"
+msgstr "Open this window from the Material Override component."
+
+msgid "win_pick_source"
+msgstr "Choose a source material above."
+
+msgid "win_pick_target"
+msgstr "This slot has no material to transfer to."
+
+msgid "insp_slot"
+msgstr "Slot"
+
+msgid "insp_slot_option"
+msgstr "{0}: {1}"
+
+msgid "insp_transfer"
+msgstr "Transfer from Another Material..."
+
+msgid "insp_no_renderer"
+msgstr "Put this component on a GameObject that has a Renderer."
+
+msgid "insp_no_target"
+msgstr "The selected slot has no material."
+
+msgid "insp_overrides"
+msgstr "Overrides: {0}"
+
+msgid "insp_clear"
+msgstr "Clear All Overrides"
+
+msgid "insp_missing_props"
+msgstr "{0} override(s) are for properties the current shader does not have, so they are skipped: {1}\nYou can remove them in the list below, or ignore this."
+
+msgid "insp_revert_tip"
+msgstr "Remove this override (back to the target material's value)"
+
+msgid "insp_kw_on"
+msgstr "keyword: on"
+
+msgid "insp_kw_off"
+msgstr "keyword: off"
+
+msgid "insp_result"
+msgstr "Result (what the build will use)"
+
+msgid "insp_slot_in_use"
+msgstr "  (in use)"
+
+msgid "insp_slot_conflict"
+msgstr "An earlier Material Override on this object already modifies this slot. Only one is allowed per slot, so this component has no effect. Choose another slot or remove it. The build will report an error."
+
+msgid "err_missing_props"
+msgstr "Material Override: slot {0} has {1} override(s) for properties the shader does not have, so they were skipped: {2}"
+
+msgid "err_no_renderer"
+msgstr "Material Override: there is no Renderer on this GameObject. Skipped."
+
+msgid "err_slot_out_of_range"
+msgstr "Material Override: slot {0} does not exist (the renderer has {1} material slots). Skipped."
+
+msgid "err_slot_empty"
+msgstr "Material Override: slot {0} has no material, or this component has not been set up yet. Skipped."
+
+msgid "err_slot_conflict"
+msgstr "Material Override: an earlier Material Override on this object already modifies slot {0}. This one was not applied. Keep only one per slot."
+
