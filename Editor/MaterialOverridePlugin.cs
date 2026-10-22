@@ -24,7 +24,8 @@ namespace Shinano.MaterialOverride
         protected override void Configure()
         {
             InPhase(BuildPhase.Generating)
-                .Run("Apply Material Override", Apply);
+                .Run("Apply Material Override", Apply)
+                .PreviewingWith(new MaterialOverridePreview());
         }
 
         private static void Apply(BuildContext ctx)
