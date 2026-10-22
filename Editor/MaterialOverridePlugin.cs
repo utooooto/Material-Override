@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using nadena.dev.ndmf;
+using nadena.dev.ndmf.animator;
 using nadena.dev.ndmf.localization;
 using Shinano.MaterialOverride;
 using UnityEngine;
@@ -26,15 +27,23 @@ namespace Shinano.MaterialOverride
             InPhase(BuildPhase.Generating)
                 .Run("Apply Material Override", Apply)
                 .PreviewingWith(new MaterialOverridePreview());
+
+            // Modular Avatar merges its animators (Merge Animator) and generates its reactive animations in
+            // Transforming, so animation references can only be fixed up after it.
+            InPhase(BuildPhase.Transforming)
+                .AfterPlugin("nadena.dev.modular-avatar")
+                .WithRequiredExtension(typeof(AnimatorServicesContext), seq => seq
+                    .Run("Rewrite animation material references", RewriteAnimations));
         }
 
         private static void Apply(BuildContext ctx)
         {
             var all = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialOverrideComponent>(true);
+            var replaced = ctx.GetState<List<Replacement>>();
             foreach (var c in all)
             {
                 if (!c.enabled) continue;
-                ErrorReport.WithContextObject(c, () => ApplyOne(ctx, c));
+                ErrorReport.WithContextObject(c, () => ApplyOne(ctx, c, replaced));
             }
 
             // Destroyed only after all are processed: the conflict check looks at the other components
@@ -42,7 +51,7 @@ namespace Shinano.MaterialOverride
                 Object.DestroyImmediate(c);
         }
 
-        private static void ApplyOne(BuildContext ctx, MaterialOverrideComponent c)
+        private static void ApplyOne(BuildContext ctx, MaterialOverrideComponent c, List<Replacement> replaced)
         {
             var renderer = c.GetComponent<Renderer>();
             if (renderer == null)
@@ -90,6 +99,56 @@ namespace Shinano.MaterialOverride
 
             mats[c.SlotIndex] = clone;
             renderer.sharedMaterials = mats;
+
+            replaced.Add(new Replacement(renderer, c.SlotIndex, current, clone));
+        }
+
+        // A keyframe that sets this renderer's slot to the original material means "the material in this
+        // slot", so it is pointed at the transferred one, as if that material had been assigned by hand.
+        // Only that renderer and slot are touched; other users of the original material keep it.
+        private static void RewriteAnimations(BuildContext ctx)
+        {
+            var replaced = ctx.GetState<List<Replacement>>();
+            if (replaced.Count == 0) return;
+
+            var asc = ctx.Extension<AnimatorServicesContext>();
+
+            // Animation paths are the ones the animator context knows, which may differ from the current
+            // hierarchy if something moved the renderer.
+            var targets = new List<(string path, string property, Object original, Object clone)>();
+            foreach (var r in replaced)
+            {
+                if (r.Renderer == null) continue;
+                targets.Add((asc.ObjectPathRemapper.GetVirtualPathForObject(r.Renderer.gameObject),
+                    $"m_Materials.Array.data[{r.Slot}]", r.Original, r.Clone));
+            }
+
+            asc.AnimationIndex.RewriteObjectCurves((binding, obj) =>
+            {
+                if (!binding.isPPtrCurve) return obj;
+                foreach (var t in targets)
+                {
+                    if (t.original == obj && t.path == binding.path && t.property == binding.propertyName)
+                        return t.clone;
+                }
+                return obj;
+            });
+        }
+
+        private readonly struct Replacement
+        {
+            public readonly Renderer Renderer;
+            public readonly int Slot;
+            public readonly Object Original;
+            public readonly Object Clone;
+
+            public Replacement(Renderer renderer, int slot, Object original, Object clone)
+            {
+                Renderer = renderer;
+                Slot = slot;
+                Original = original;
+                Clone = clone;
+            }
         }
     }
 }
