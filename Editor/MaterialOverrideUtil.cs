@@ -75,6 +75,38 @@ namespace Shinano.MaterialOverride
             PrefabUtility.RecordPrefabInstancePropertyModifications(c);
         }
 
+        // Materials inside a model file or a package cannot be written back
+        public static bool IsEditableAsset(Material m)
+        {
+            string path = AssetDatabase.GetAssetPath(m);
+            if (string.IsNullOrEmpty(path) || path.StartsWith("Packages/")) return false;
+            return !(AssetImporter.GetAtPath(path) is ModelImporter);
+        }
+
+        // Writes the recorded differences into the material asset itself
+        public static void BakeInto(Material asset, MaterialOverrideComponent c)
+        {
+            Undo.RecordObject(asset, "Bake Material Override");
+            Apply(asset, c);
+            EditorUtility.SetDirty(asset);
+            AssetDatabase.SaveAssets();
+        }
+
+        // Saves target + differences as a new material asset; returns null when the dialog is cancelled
+        public static Material BakeAsNew(MaterialOverrideComponent c, string dialogTitle)
+        {
+            string source = AssetDatabase.GetAssetPath(c.TargetMaterial);
+            string dir = IsEditableAsset(c.TargetMaterial) ? System.IO.Path.GetDirectoryName(source) : "Assets";
+            string path = EditorUtility.SaveFilePanelInProject(dialogTitle, c.TargetMaterial.name + "_Override", "mat", "", dir);
+            if (string.IsNullOrEmpty(path)) return null;
+
+            var mat = new Material(c.TargetMaterial);
+            Apply(mat, c);
+            AssetDatabase.CreateAsset(mat, path);
+            AssetDatabase.SaveAssets();
+            return mat;
+        }
+
         public static int CountOverrides(MaterialOverrideComponent c)
         {
             return (c.IsOverrideShader ? 1 : 0) + (c.IsOverrideRenderQueue ? 1 : 0)

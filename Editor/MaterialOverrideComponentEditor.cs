@@ -16,6 +16,7 @@ namespace Shinano.MaterialOverride
         private RecordingMaterialEditor _materialEditor;
         private int _dirtyCount;
         private bool _showOverrides;
+        private bool _showAdvanced;
 
         private void OnEnable()
         {
@@ -124,7 +125,7 @@ namespace Shinano.MaterialOverride
             DrawMissingOverrides();
             DrawRecording();
             DrawOverrides();
-            DrawTransfer();
+            DrawAdvanced();
         }
 
         // Overrides for properties the current shader lacks (e.g. after the slot got another material).
@@ -140,15 +141,59 @@ namespace Shinano.MaterialOverride
                 MaterialOverrideUtil.JoinNames(missing)), MessageType.Warning);
         }
 
-        private void DrawTransfer()
+        // Transfer and bake buttons, safest first. The bake buttons need something to bake.
+        private void DrawAdvanced()
         {
             EditorGUILayout.Space();
+            _showAdvanced = EditorGUILayout.Foldout(_showAdvanced, T("insp_advanced"), true);
+            if (!_showAdvanced) return;
+
             bool conflict = MaterialOverrideUtil.IsSlotClaimedByOther(_t, _t.SlotIndex);
+            bool canBake = !conflict && MaterialOverrideUtil.CountOverrides(_t) > 0;
+            bool editable = MaterialOverrideUtil.IsEditableAsset(_t.TargetMaterial);
+
             using (new EditorGUI.DisabledScope(conflict))
             {
                 if (GUILayout.Button(T("insp_transfer"), GUILayout.Height(24)))
                     MaterialOverrideWindow.Open(_t);
             }
+
+            using (new EditorGUI.DisabledScope(!canBake))
+            {
+                if (GUILayout.Button(new GUIContent(T("insp_bake_new"), T("insp_bake_new_tip")), GUILayout.Height(24)))
+                {
+                    var created = MaterialOverrideUtil.BakeAsNew(_t, T("insp_bake_new_title"));
+                    if (created != null) EditorGUIUtility.PingObject(created);
+                    GUIUtility.ExitGUI();
+                }
+            }
+
+            if (!editable)
+                EditorGUILayout.HelpBox(T("insp_bake_readonly"), MessageType.Info);
+
+            using (new EditorGUI.DisabledScope(!canBake || !editable))
+            {
+                if (GUILayout.Button(new GUIContent(T("insp_bake_orig"), T("insp_bake_orig_tip")), GUILayout.Height(24)))
+                    BakeIntoOriginal();
+            }
+        }
+
+        private void BakeIntoOriginal()
+        {
+            // A component that exists in the prefab asset cannot be removed from an instance
+            bool removable = PrefabUtility.GetCorrespondingObjectFromSource(_t) == null;
+            string name = _t.TargetMaterial.name;
+            string message = MaterialOverrideLang.F(removable ? "insp_bake_dlg_msg" : "insp_bake_dlg_msg_keep", name);
+            if (!EditorUtility.DisplayDialog(T("insp_bake_dlg_title"), message, T("insp_bake_ok"), T("insp_bake_cancel")))
+                return;
+
+            MaterialOverrideUtil.BakeInto(_t.TargetMaterial, _t);
+            if (removable)
+            {
+                Undo.DestroyObjectImmediate(_t);
+                GUIUtility.ExitGUI();
+            }
+            RebuildRecording();
         }
 
         private void DrawSlot(Material[] mats)

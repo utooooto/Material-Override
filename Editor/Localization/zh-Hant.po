@@ -125,6 +125,42 @@ msgstr "{0}：{1}"
 msgid "insp_transfer"
 msgstr "從其他材質轉移..."
 
+msgid "insp_advanced"
+msgstr "進階"
+
+msgid "insp_bake_new"
+msgstr "Bake 成新材質..."
+
+msgid "insp_bake_new_tip"
+msgstr "把結果存成新的材質檔。此元件保留。"
+
+msgid "insp_bake_new_title"
+msgstr "儲存新材質"
+
+msgid "insp_bake_orig"
+msgstr "Bake 進原始材質"
+
+msgid "insp_bake_orig_tip"
+msgstr "把覆寫寫進原始材質檔，並移除此元件。所有使用該材質的物件都會受影響。"
+
+msgid "insp_bake_readonly"
+msgstr "原始材質無法在此修改（位於模型檔或套件內）。請改用「Bake 成新材質」。"
+
+msgid "insp_bake_dlg_title"
+msgstr "Bake 進原始材質"
+
+msgid "insp_bake_dlg_msg"
+msgstr "這會修改材質檔「{0}」，所有使用它的物件都會一起改變，之後移除此元件。\n材質檔的變更可能無法完整還原。"
+
+msgid "insp_bake_dlg_msg_keep"
+msgstr "這會修改材質檔「{0}」，所有使用它的物件都會一起改變。\n此元件來自 Prefab，無法在這裡移除，會保留。\n材質檔的變更可能無法完整還原。"
+
+msgid "insp_bake_ok"
+msgstr "Bake"
+
+msgid "insp_bake_cancel"
+msgstr "取消"
+
 msgid "insp_no_renderer"
 msgstr "請把此元件放在有 Renderer 的 GameObject 上。"
 

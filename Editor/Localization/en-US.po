@@ -125,6 +125,42 @@ msgstr "{0}: {1}"
 msgid "insp_transfer"
 msgstr "Transfer from Another Material..."
 
+msgid "insp_advanced"
+msgstr "Advanced"
+
+msgid "insp_bake_new"
+msgstr "Bake as New Material..."
+
+msgid "insp_bake_new_tip"
+msgstr "Save the result as a new material asset. This component stays."
+
+msgid "insp_bake_new_title"
+msgstr "Save New Material"
+
+msgid "insp_bake_orig"
+msgstr "Bake into Original Material"
+
+msgid "insp_bake_orig_tip"
+msgstr "Write the overrides into the original material asset and remove this component. Affects every object that uses it."
+
+msgid "insp_bake_readonly"
+msgstr "The original material cannot be edited here (it is inside a model file or a package). Use 'Bake as New Material' instead."
+
+msgid "insp_bake_dlg_title"
+msgstr "Bake into Original Material"
+
+msgid "insp_bake_dlg_msg"
+msgstr "This changes the asset '{0}' for every object that uses it, then removes this component.\nThe asset change may not be fully undoable."
+
+msgid "insp_bake_dlg_msg_keep"
+msgstr "This changes the asset '{0}' for every object that uses it.\nThis component comes from a prefab and cannot be removed from here, so it stays.\nThe asset change may not be fully undoable."
+
+msgid "insp_bake_ok"
+msgstr "Bake"
+
+msgid "insp_bake_cancel"
+msgstr "Cancel"
+
 msgid "insp_no_renderer"
 msgstr "Put this component on a GameObject that has a Renderer."
 
