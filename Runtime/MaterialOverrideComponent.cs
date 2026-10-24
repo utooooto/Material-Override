@@ -30,8 +30,8 @@ namespace Shinano.MaterialOverride
         // Slot of Renderer.sharedMaterials to modify.
         public int SlotIndex;
 
-        // The material that was in the slot when the target was chosen. It is the baseline the
-        // differences are recorded against, and the build checks that the slot still holds it.
+        // The baseline the differences are recorded against. The inspector keeps it in sync with the
+        // slot's material; the build and the preview always start from the slot's current material.
         public Material TargetMaterial;
 
         // Only used by the transfer window as the values to copy from.
