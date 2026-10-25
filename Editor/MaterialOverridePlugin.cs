@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using nadena.dev.ndmf;
 using nadena.dev.ndmf.animator;
 using nadena.dev.ndmf.localization;
-using Shinano.MaterialOverride;
+using Uto.MaterialOverride;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 [assembly: ExportsPlugin(typeof(MaterialOverridePlugin))]
 
-namespace Shinano.MaterialOverride
+namespace Uto.MaterialOverride
 {
     // Runs in Generating, before the Transforming phase where Modular Avatar (Material Setter / Swap,
     // toggles that generate animations) reads the renderer's materials. From its point of view the slot
     // then simply holds the final material, as if it had been assigned by hand.
     internal class MaterialOverridePlugin : Plugin<MaterialOverridePlugin>
     {
-        public override string QualifiedName => "shinano.material-override";
+        public override string QualifiedName => "uto.material-override";
         public override string DisplayName => "Material Override";
 
         private static readonly Localizer L = new Localizer("en-US",

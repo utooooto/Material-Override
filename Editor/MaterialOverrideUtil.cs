@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Shinano.MaterialOverride
+namespace Uto.MaterialOverride
 {
     // Shared by the inspector, the transfer window and the NDMF plugin so that
     // "what is recorded" and "what is applied at build time" cannot drift apart.

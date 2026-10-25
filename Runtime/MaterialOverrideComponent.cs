@@ -4,7 +4,7 @@ using nadena.dev.ndmf;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Shinano.MaterialOverride
+namespace Uto.MaterialOverride
 {
     // One recorded difference of a single material property (same idea as TTT's MaterialProperty).
     [Serializable]
@@ -24,7 +24,7 @@ namespace Shinano.MaterialOverride
     // Records the final state of one material slot of the renderer on the same GameObject as a
     // set of differences from TargetMaterial. The NDMF plugin clones the slot's material at build
     // time and applies the differences, so the original material asset is never modified.
-    [AddComponentMenu("Shinano/Material Override")]
+    [AddComponentMenu("Uto/Material Override")]
     public sealed class MaterialOverrideComponent : MonoBehaviour, INDMFEditorOnly
     {
         // Slot of Renderer.sharedMaterials to modify.

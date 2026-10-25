@@ -1,6 +1,6 @@
 {
-    "name": "Shinano.MaterialOverride.Runtime",
-    "rootNamespace": "Shinano.MaterialOverride",
+    "name": "Uto.MaterialOverride.Runtime",
+    "rootNamespace": "Uto.MaterialOverride",
     "references": [
         "nadena.dev.ndmf.runtime",
         "VRC.SDKBase"

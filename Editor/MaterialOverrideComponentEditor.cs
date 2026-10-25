@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Shinano.MaterialOverride
+namespace Uto.MaterialOverride
 {
     [CustomEditor(typeof(MaterialOverrideComponent))]
     internal class MaterialOverrideComponentEditor : Editor

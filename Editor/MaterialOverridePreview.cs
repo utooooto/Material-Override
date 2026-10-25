@@ -6,7 +6,7 @@ using nadena.dev.ndmf.preview;
 using UnityEditor;
 using UnityEngine;
 
-namespace Shinano.MaterialOverride
+namespace Uto.MaterialOverride
 {
     // Shows the result of MaterialOverrideComponent components on the scene's renderers without building.
     // The build-time logic (MaterialOverrideUtil.Apply) is shared, so the preview matches the build.
@@ -14,7 +14,7 @@ namespace Shinano.MaterialOverride
     {
         private static readonly TogglablePreviewNode EnableNode = TogglablePreviewNode.Create(
             () => "Material Override",
-            qualifiedName: "shinano.material-override/Preview",
+            qualifiedName: "uto.material-override/Preview",
             true
         );
 
