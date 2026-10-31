@@ -19,9 +19,13 @@ components all see the final material.
 
 ## Installation
 
-> The listing URL is not published yet.
+Add this VPM repository to VCC (2.1.0 or newer) or ALCOM, then add **Material Override** to your project:
 
-Add this package's VPM repository to VCC or ALCOM, then add **Material Override** to your project.
+```
+https://utooooto.github.io/vpm/index.json
+```
+
+In VCC: **Settings** > **Packages** > **Add Repository**, paste the URL, and confirm.
 
 ## Components
 
