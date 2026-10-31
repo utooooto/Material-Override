@@ -2,8 +2,7 @@
     "name": "Uto.MaterialOverride.Runtime",
     "rootNamespace": "Uto.MaterialOverride",
     "references": [
-        "nadena.dev.ndmf.runtime",
-        "VRC.SDKBase"
+        "nadena.dev.ndmf.runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
