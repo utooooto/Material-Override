@@ -2,12 +2,17 @@
 
 [English](README.md) | **繁體中文**
 
-NDMF 元件，把材質記錄成一組**差異**，在 Avatar 建置時才套用。不會建立或修改任何材質資產，原本的材質完全不變，也能清楚看到你改了什麼。
+在不動材質資產的情況下，修改 VRChat Avatar 上的材質。你只需要記錄和原始材質不同的部分，變更會在 Avatar 建置（NDMF）時才套用。
 
-- **Material Override**：指定一個目標材質，GameObject 底下所有使用該材質的槽位都會被修改。
-- **Material Slot Override**：修改某個 Renderer 的某一個槽位。
+- **非破壞性**：不會建立或修改任何材質資產。Inspector 只顯示你改過的內容，移除元件就等於移除變更。需要的話，也可以把結果烘焙成新的材質資產。
+- **兩種元件**：**Material Override** 會修改 GameObject 底下所有使用指定材質的槽位（例如身體、衣服和配件共用的同一個材質）。**Material Slot Override** 只修改某個 Renderer 的某一個槽位。
+- **可疊加**：父物件上的元件先套用，再來是子物件，最後是槽位自己的元件。每一層都以前一層的結果為基礎，所以子物件可以覆蓋父物件的設定，反過來則不會。
+- **支援動畫與 Modular Avatar**：開關、指向原始材質的動畫，以及 Modular Avatar 的 Material Swap，看到的都是最後的材質。
+- **建置前就能預覽**：NDMF 的預覽會在場景中顯示結果（Mesh 與 Skinned Mesh Renderer）。
+- **不限 shader**：不綁定 lilToon。也可以從另一個材質複製選定的屬性。
+- **需求**：Unity 2022.3 與 NDMF 1.13.1 以上。與 TexTransTool（TTT）的相容性尚未驗證。
 
-結果的行為就像你手動指派的材質：動畫、開關與 Modular Avatar 的 Reactive 元件看到的都是最後的材質。
+安裝方式：把 [安裝](#安裝) 一節說明的 VPM 倉庫加到 VCC 或 ALCOM。
 
 ## 需求
 

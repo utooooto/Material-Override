@@ -2,15 +2,25 @@
 
 **English** | [繁體中文](README.zh-Hant.md)
 
-NDMF components that record a material as a set of **differences** and apply them when the avatar is built.
-No material asset is created or modified, so the original materials stay untouched and you can see exactly what
-you changed.
+Change materials on your VRChat avatar without touching the material assets. You record only what differs
+from the original, and the changes are applied when the avatar is built (NDMF).
 
-- **Material Override**: pick a target material; every slot below the GameObject that uses it is modified.
-- **Material Slot Override**: modify one slot of one renderer.
+- **Non-destructive**: no material asset is created or modified. The inspector shows only what you changed, and
+  removing the component removes the change. You can still bake the result into a new material asset when you
+  want one.
+- **Two components**: **Material Override** changes every slot below a GameObject that uses a given material
+  (for example one material shared by the body, the clothes and the accessories). **Material Slot Override**
+  changes one slot of one renderer.
+- **Stackable**: components on parent objects apply first, then those on children, then the slot's own. Each
+  layer builds on the previous one, so a child can override its parent but never the other way round.
+- **Works with animations and Modular Avatar**: toggles, animations that point at the original material, and
+  Modular Avatar's Material Swap all see the final material.
+- **Preview before you build**: NDMF's preview shows the result in the scene (mesh and skinned mesh renderers).
+- **Any shader**: not tied to lilToon. You can also copy selected properties from another material.
+- **Requires** Unity 2022.3 and NDMF 1.13.1 or newer. Compatibility with TexTransTool (TTT) has not been
+  verified.
 
-The result behaves like a material you assigned by hand: animations, toggles and Modular Avatar's reactive
-components all see the final material.
+To install, add the VPM repository described under [Installation](#installation) to VCC or ALCOM.
 
 ## Requirements
 
