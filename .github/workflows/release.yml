@@ -2,6 +2,7 @@ name: Build Release
 
 # Adapted from vrchat-community/template-package: this repository is the package itself
 # (package.json at the repository root), not a Unity project with the package under Packages/.
+# Run it manually from the Actions tab to publish the version in package.json.
 on:
   workflow_dispatch:
 
