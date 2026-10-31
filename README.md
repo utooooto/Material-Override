@@ -43,7 +43,8 @@ To install, add the VPM repository described under [Installation](#installation)
 
 ## Installation
 
-Add this VPM repository to VCC (2.1.0 or newer) or ALCOM, then add **Material Override** to your project:
+Open the [listing page](https://utooooto.github.io/vpm/) and press **Add to VCC**, or add this VPM repository
+to VCC (2.1.0 or newer) or ALCOM yourself, then add **Material Override** to your project:
 
 ```
 https://utooooto.github.io/vpm/index.json

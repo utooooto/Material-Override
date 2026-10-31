@@ -32,7 +32,7 @@
 
 ## 安裝
 
-把這個 VPM 倉庫加到 VCC（2.1.0 以上）或 ALCOM，再把 **Material Override** 加進專案：
+開啟 [Listing 頁面](https://utooooto.github.io/vpm/)按下 **Add to VCC**，或自己把這個 VPM 倉庫加到 VCC（2.1.0 以上）或 ALCOM，再把 **Material Override** 加進專案：
 
 ```
 https://utooooto.github.io/vpm/index.json
