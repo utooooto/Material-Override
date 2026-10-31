@@ -63,7 +63,7 @@ public class MaterialOverrideWindow : EditorWindow
         public readonly List<Section> Sections = new List<Section>();
     }
 
-    [SerializeField] private MaterialSlotOverrideComponent _component;
+    [SerializeField] private MaterialOverrideBase _component;
 
     private Material _source;
     // Temporary copy of the component's target with its recorded overrides applied; edited by Apply.
@@ -85,7 +85,7 @@ public class MaterialOverrideWindow : EditorWindow
     private string _search = "";
     private Vector2 _scroll;
 
-    public static void Open(MaterialSlotOverrideComponent component)
+    public static void Open(MaterialOverrideBase component)
     {
         var window = GetWindow<MaterialOverrideWindow>("Material Override");
         window._component = component;
@@ -387,7 +387,7 @@ public class MaterialOverrideWindow : EditorWindow
         }
 
         // Record original -> result as the component's overrides (nothing is written to any asset)
-        MaterialOverrideUtil.WriteDiff(_component, _component.TargetMaterial, _target);
+        MaterialOverrideUtil.WriteDiff(_component, _target);
 
         Debug.Log(F("log_done", done, _component.TargetMaterial.name), _component);
         Close();

@@ -41,20 +41,44 @@ namespace Uto.MaterialOverride
             return false;
         }
 
-        // A throwaway copy of the target with the recorded differences applied (what the build will produce).
-        public static Material CreateRecordingMaterial(MaterialOverrideBase c)
+        // A throwaway copy of the target with the layers before c applied: what c's differences are
+        // recorded against.
+        public static Material CreateBaseMaterial(MaterialOverrideBase c)
         {
             var mat = new Material(c.TargetMaterial)
             {
-                name = "Modified Material",
+                name = "Base Material",
                 hideFlags = HideFlags.HideAndDontSave,
             };
+            foreach (var layer in MaterialOverrideChain.GetUpstream(c))
+                Apply(mat, layer);
+            return mat;
+        }
+
+        // A throwaway copy of the base with c's differences applied (what the build will produce).
+        public static Material CreateRecordingMaterial(MaterialOverrideBase c)
+        {
+            var mat = CreateBaseMaterial(c);
+            mat.name = "Modified Material";
             Apply(mat, c);
             return mat;
         }
 
-        // Rewrites the recorded differences so that original + differences == modified.
-        public static void WriteDiff(MaterialOverrideBase c, Material original, Material modified)
+        // Rewrites the recorded differences so that base + differences == modified.
+        public static void WriteDiff(MaterialOverrideBase c, Material modified)
+        {
+            var baseMaterial = CreateBaseMaterial(c);
+            try
+            {
+                WriteDiff(c, baseMaterial, modified);
+            }
+            finally
+            {
+                Object.DestroyImmediate(baseMaterial);
+            }
+        }
+
+        private static void WriteDiff(MaterialOverrideBase c, Material original, Material modified)
         {
             Undo.RecordObject(c, "Material Override");
 
@@ -92,7 +116,7 @@ namespace Uto.MaterialOverride
             AssetDatabase.SaveAssets();
         }
 
-        // Saves target + differences as a new material asset; returns null when the dialog is cancelled
+        // Saves the result (base + differences) as a new material asset; returns null when the dialog is cancelled
         public static Material BakeAsNew(MaterialOverrideBase c, string dialogTitle)
         {
             string source = AssetDatabase.GetAssetPath(c.TargetMaterial);
@@ -100,8 +124,9 @@ namespace Uto.MaterialOverride
             string path = EditorUtility.SaveFilePanelInProject(dialogTitle, c.TargetMaterial.name + "_Override", "mat", "", dir);
             if (string.IsNullOrEmpty(path)) return null;
 
-            var mat = new Material(c.TargetMaterial);
-            Apply(mat, c);
+            var recording = CreateRecordingMaterial(c);
+            var mat = new Material(recording);
+            Object.DestroyImmediate(recording);
             AssetDatabase.CreateAsset(mat, path);
             AssetDatabase.SaveAssets();
             return mat;
@@ -111,6 +136,18 @@ namespace Uto.MaterialOverride
         {
             return (c.IsOverrideShader ? 1 : 0) + (c.IsOverrideRenderQueue ? 1 : 0)
                    + c.OverrideProperties.Count + c.EnabledKeywords.Count + c.DisabledKeywords.Count;
+        }
+
+        // What the component changes, for a one-line summary
+        public static List<string> GetOverrideNames(MaterialOverrideBase c)
+        {
+            var names = new List<string>();
+            if (c.IsOverrideShader && c.OverrideShader != null) names.Add(c.OverrideShader.name);
+            if (c.IsOverrideRenderQueue) names.Add("Render Queue");
+            names.AddRange(c.OverrideProperties.Select(p => p.PropertyName));
+            names.AddRange(c.EnabledKeywords);
+            names.AddRange(c.DisabledKeywords);
+            return names;
         }
 
         // Recorded properties that the material's shader does not have; they are skipped when applying

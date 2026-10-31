@@ -195,7 +195,7 @@ msgid "insp_slot_conflict"
 msgstr "An earlier Material Slot Override on this object already modifies this slot. Only one is allowed per slot, so this component has no effect. Choose another slot or remove it. The build will report an error."
 
 msgid "err_missing_props"
-msgstr "Material Override: slot {0} has {1} override(s) for properties the shader does not have, so they were skipped: {2}"
+msgstr "Material Override: {0} has {1} override(s) for properties the shader does not have, so they were skipped: {2}"
 
 msgid "err_no_renderer"
 msgstr "Material Slot Override: there is no Renderer on this GameObject. Skipped."
@@ -208,4 +208,22 @@ msgstr "Material Slot Override: slot {0} has no material, or this component has 
 
 msgid "err_slot_conflict"
 msgstr "Material Slot Override: an earlier Material Slot Override on this object already modifies slot {0}. This one was not applied. Keep only one per slot."
+
+msgid "err_no_target"
+msgstr "Material Override: no target material is set. Skipped."
+
+msgid "insp_pick_target"
+msgstr "Choose the target material. Every slot below this GameObject that uses it is modified."
+
+msgid "insp_target_scope"
+msgstr "{0} slot(s) below this GameObject use this material."
+
+msgid "insp_upstream"
+msgstr "Applied before this component ({0})"
+
+msgid "insp_upstream_select_tip"
+msgstr "Select this object"
+
+msgid "insp_bake_upstream"
+msgstr "Other components apply before this one, so the original material cannot take the overrides alone. Use 'Bake as New Material' instead."
 
