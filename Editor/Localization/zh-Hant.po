@@ -192,20 +192,20 @@ msgid "insp_slot_in_use"
 msgstr "  （已被使用）"
 
 msgid "insp_slot_conflict"
-msgstr "這個物件上排在前面的 Material Override 已經修改此材質槽。每個材質槽只允許一個，所以這個元件不會生效。請改選其他材質槽或移除它。建置會報錯。"
+msgstr "這個物件上排在前面的 Material Slot Override 已經修改此材質槽。每個材質槽只允許一個，所以這個元件不會生效。請改選其他材質槽或移除它。建置會報錯。"
 
 msgid "err_missing_props"
 msgstr "Material Override：材質槽 {0} 有 {1} 筆覆寫的屬性在 shader 上不存在，已略過：{2}"
 
 msgid "err_no_renderer"
-msgstr "Material Override：此 GameObject 上沒有 Renderer，已略過。"
+msgstr "Material Slot Override：此 GameObject 上沒有 Renderer，已略過。"
 
 msgid "err_slot_out_of_range"
-msgstr "Material Override：材質槽 {0} 不存在（Renderer 只有 {1} 個材質槽），已略過。"
+msgstr "Material Slot Override：材質槽 {0} 不存在（Renderer 只有 {1} 個材質槽），已略過。"
 
 msgid "err_slot_empty"
-msgstr "Material Override：材質槽 {0} 沒有材質，或此元件尚未設定，已略過。"
+msgstr "Material Slot Override：材質槽 {0} 沒有材質，或此元件尚未設定，已略過。"
 
 msgid "err_slot_conflict"
-msgstr "Material Override：此物件上排在前面的 Material Override 已經修改材質槽 {0}，這個元件未套用。每個材質槽只能保留一個。"
+msgstr "Material Slot Override：此物件上排在前面的 Material Slot Override 已經修改材質槽 {0}，這個元件未套用。每個材質槽只能保留一個。"
 

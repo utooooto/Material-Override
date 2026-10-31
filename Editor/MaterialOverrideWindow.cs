@@ -1,6 +1,6 @@
 // Material Override
 // Selectively transfers properties from a source material to the target slot of a
-// MaterialOverrideComponent component (for example, a lilToon preset material bought on BOOTH).
+// MaterialSlotOverrideComponent component (for example, a lilToon preset material bought on BOOTH).
 //
 // Opened from the component's inspector ("Open Transfer Window"). The target column shows the
 // component's current result (original target + recorded overrides). Applying copies the selected
@@ -63,7 +63,7 @@ public class MaterialOverrideWindow : EditorWindow
         public readonly List<Section> Sections = new List<Section>();
     }
 
-    [SerializeField] private MaterialOverrideComponent _component;
+    [SerializeField] private MaterialSlotOverrideComponent _component;
 
     private Material _source;
     // Temporary copy of the component's target with its recorded overrides applied; edited by Apply.
@@ -85,7 +85,7 @@ public class MaterialOverrideWindow : EditorWindow
     private string _search = "";
     private Vector2 _scroll;
 
-    public static void Open(MaterialOverrideComponent component)
+    public static void Open(MaterialSlotOverrideComponent component)
     {
         var window = GetWindow<MaterialOverrideWindow>("Material Override");
         window._component = component;

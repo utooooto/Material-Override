@@ -31,9 +31,9 @@ namespace Uto.MaterialOverride
         // same renderer are not allowed: the component that comes first on the GameObject keeps the slot,
         // every later one is inactive (the inspector says so, the build reports an error and skips it).
         // Disabled components do not claim anything.
-        public static bool IsSlotClaimedByOther(MaterialOverrideComponent c, int slot)
+        public static bool IsSlotClaimedByOther(MaterialSlotOverrideComponent c, int slot)
         {
-            foreach (var other in c.GetComponents<MaterialOverrideComponent>())
+            foreach (var other in c.GetComponents<MaterialSlotOverrideComponent>())
             {
                 if (other == c) return false;
                 if (other.enabled && other.TargetMaterial != null && other.SlotIndex == slot) return true;

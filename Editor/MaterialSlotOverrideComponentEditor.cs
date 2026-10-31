@@ -5,10 +5,10 @@ using UnityEngine.Rendering;
 
 namespace Uto.MaterialOverride
 {
-    [CustomEditor(typeof(MaterialOverrideComponent))]
-    internal class MaterialOverrideComponentEditor : Editor
+    [CustomEditor(typeof(MaterialSlotOverrideComponent))]
+    internal class MaterialSlotOverrideComponentEditor : Editor
     {
-        private MaterialOverrideComponent _t;
+        private MaterialSlotOverrideComponent _t;
 
         // Throwaway material = target + recorded overrides, drawn with the normal material inspector.
         // Edits made there are written back to the component as differences from the target.
@@ -20,7 +20,7 @@ namespace Uto.MaterialOverride
 
         private void OnEnable()
         {
-            _t = (MaterialOverrideComponent)target;
+            _t = (MaterialSlotOverrideComponent)target;
             Undo.undoRedoPerformed += OnUndoRedo;
             RebuildRecording();
         }
@@ -210,7 +210,7 @@ namespace Uto.MaterialOverride
             int picked = EditorGUILayout.Popup(T("insp_slot"), slot, options);
             bool changed = EditorGUI.EndChangeCheck();
 
-            // A slot already modified by another Material Override on this object cannot be chosen
+            // A slot already modified by another Material Slot Override on this object cannot be chosen
             if (changed && MaterialOverrideUtil.IsSlotClaimedByOther(_t, picked)) changed = false;
 
             // First time: record the first slot that has a material and is not claimed yet
@@ -238,7 +238,7 @@ namespace Uto.MaterialOverride
 
             if (changed)
             {
-                Undo.RecordObject(_t, "Material Override");
+                Undo.RecordObject(_t, "Material Slot Override");
                 _t.SlotIndex = picked;
                 Record(mats[picked]);
                 return;
@@ -250,7 +250,7 @@ namespace Uto.MaterialOverride
             // The slot holds another material now: follow it. The overrides are values, so they are kept.
             if (_t.TargetMaterial != null && mats[slot] != null && mats[slot] != _t.TargetMaterial)
             {
-                Undo.RecordObject(_t, "Material Override");
+                Undo.RecordObject(_t, "Material Slot Override");
                 Retarget(mats[slot]);
             }
         }
@@ -342,7 +342,7 @@ namespace Uto.MaterialOverride
 
             if (remove != null)
             {
-                Undo.RecordObject(_t, "Material Override");
+                Undo.RecordObject(_t, "Material Slot Override");
                 remove();
                 EditorUtility.SetDirty(_t);
                 PrefabUtility.RecordPrefabInstancePropertyModifications(_t);
@@ -352,7 +352,7 @@ namespace Uto.MaterialOverride
 
             if (GUILayout.Button(T("insp_clear")))
             {
-                Undo.RecordObject(_t, "Material Override");
+                Undo.RecordObject(_t, "Material Slot Override");
                 ClearOverrides();
                 RebuildRecording();
             }

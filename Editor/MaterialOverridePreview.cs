@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Uto.MaterialOverride
 {
-    // Shows the result of MaterialOverrideComponent components on the scene's renderers without building.
+    // Shows the result of MaterialSlotOverrideComponent components on the scene's renderers without building.
     // The build-time logic (MaterialOverrideUtil.Apply) is shared, so the preview matches the build.
     internal class MaterialOverridePreview : IRenderFilter
     {
@@ -30,7 +30,7 @@ namespace Uto.MaterialOverride
 
         public ImmutableList<RenderGroup> GetTargetGroups(ComputeContext context)
         {
-            return context.GetComponentsByType<MaterialOverrideComponent>()
+            return context.GetComponentsByType<MaterialSlotOverrideComponent>()
                 .Select(c => context.GetComponent<Renderer>(c.gameObject))
                 .Where(r => r != null)
                 .Distinct()
@@ -69,7 +69,7 @@ namespace Uto.MaterialOverride
                 var current = context.Observe(_target, r => r.sharedMaterials,
                     (a, b) => a.SequenceEqual(b));
 
-                foreach (var c in context.GetComponents<MaterialOverrideComponent>(_target.gameObject))
+                foreach (var c in context.GetComponents<MaterialSlotOverrideComponent>(_target.gameObject))
                 {
                     // Any recorded change re-runs this method (EditorJsonUtility also covers object references)
                     context.Observe(c, x => EditorJsonUtility.ToJson(x));

@@ -38,7 +38,7 @@ namespace Uto.MaterialOverride
 
         private static void Apply(BuildContext ctx)
         {
-            var all = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialOverrideComponent>(true);
+            var all = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialSlotOverrideComponent>(true);
             var replaced = ctx.GetState<List<Replacement>>();
             foreach (var c in all)
             {
@@ -51,7 +51,7 @@ namespace Uto.MaterialOverride
                 Object.DestroyImmediate(c);
         }
 
-        private static void ApplyOne(BuildContext ctx, MaterialOverrideComponent c, List<Replacement> replaced)
+        private static void ApplyOne(BuildContext ctx, MaterialSlotOverrideComponent c, List<Replacement> replaced)
         {
             var renderer = c.GetComponent<Renderer>();
             if (renderer == null)
