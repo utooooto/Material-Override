@@ -1,0 +1,60 @@
+name: Build Release
+
+# Adapted from vrchat-community/template-package: this repository is the package itself
+# (package.json at the repository root), not a Unity project with the package under Packages/.
+on:
+  workflow_dispatch:
+
+jobs:
+
+  # Build and release the Package
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+      # Checkout Local Repository
+      - name: Checkout
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac
+
+      # Get the Package name and version based on the package.json file
+      - name: Get Name
+        id: name
+        uses: zoexx/github-action-json-file-properties@b9f36ce6ee6fe2680cd3c32b2c62e22eade7e590
+        with:
+            file_path: "package.json"
+            prop_path: "name"
+
+      - name: Get Version
+        id: version
+        uses: zoexx/github-action-json-file-properties@b9f36ce6ee6fe2680cd3c32b2c62e22eade7e590
+        with:
+            file_path: "package.json"
+            prop_path: "version"
+
+      # Configure the Environment Variables needed for releasing the Package
+      - name: Set Environment Variables
+        run: |
+          echo "zipFile=${{ steps.name.outputs.value }}-${{ steps.version.outputs.value }}.zip" >> $GITHUB_ENV
+          echo "version=${{ steps.version.outputs.value }}" >> $GITHUB_ENV
+
+      # Zip the Package for release, without repository metadata
+      - name: Create Package Zip
+        run: zip -r "${{ github.workspace }}/${{ env.zipFile }}" . -x ".git/*" ".github/*"
+
+      # Make a release tag of the version from the package.json file
+      - name: Create Tag
+        id: tag_version
+        uses: rickstaa/action-create-tag@88dbf7ff6fe2405f8e8f6c6fdfd78829bc631f83
+        with:
+          tag: "${{ env.version }}"
+
+      # Publish the Release to GitHub
+      - name: Make Release
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
+        with:
+          files: |
+            ${{ env.zipFile }}
+            package.json
+          tag_name: ${{ env.version }}
