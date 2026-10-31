@@ -12,7 +12,7 @@ namespace Uto.MaterialOverride
     {
         // Applies the recorded differences to an editable material.
         // Order matters: changing the shader resets the render queue, so the queue goes last.
-        public static void Apply(Material mat, MaterialOverrideComponent c)
+        public static void Apply(Material mat, MaterialOverrideBase c)
         {
             if (c.IsOverrideShader && c.OverrideShader != null)
                 mat.shader = c.OverrideShader;
@@ -42,7 +42,7 @@ namespace Uto.MaterialOverride
         }
 
         // A throwaway copy of the target with the recorded differences applied (what the build will produce).
-        public static Material CreateRecordingMaterial(MaterialOverrideComponent c)
+        public static Material CreateRecordingMaterial(MaterialOverrideBase c)
         {
             var mat = new Material(c.TargetMaterial)
             {
@@ -54,7 +54,7 @@ namespace Uto.MaterialOverride
         }
 
         // Rewrites the recorded differences so that original + differences == modified.
-        public static void WriteDiff(MaterialOverrideComponent c, Material original, Material modified)
+        public static void WriteDiff(MaterialOverrideBase c, Material original, Material modified)
         {
             Undo.RecordObject(c, "Material Override");
 
@@ -84,7 +84,7 @@ namespace Uto.MaterialOverride
         }
 
         // Writes the recorded differences into the material asset itself
-        public static void BakeInto(Material asset, MaterialOverrideComponent c)
+        public static void BakeInto(Material asset, MaterialOverrideBase c)
         {
             Undo.RecordObject(asset, "Bake Material Override");
             Apply(asset, c);
@@ -93,7 +93,7 @@ namespace Uto.MaterialOverride
         }
 
         // Saves target + differences as a new material asset; returns null when the dialog is cancelled
-        public static Material BakeAsNew(MaterialOverrideComponent c, string dialogTitle)
+        public static Material BakeAsNew(MaterialOverrideBase c, string dialogTitle)
         {
             string source = AssetDatabase.GetAssetPath(c.TargetMaterial);
             string dir = IsEditableAsset(c.TargetMaterial) ? System.IO.Path.GetDirectoryName(source) : "Assets";
@@ -107,14 +107,14 @@ namespace Uto.MaterialOverride
             return mat;
         }
 
-        public static int CountOverrides(MaterialOverrideComponent c)
+        public static int CountOverrides(MaterialOverrideBase c)
         {
             return (c.IsOverrideShader ? 1 : 0) + (c.IsOverrideRenderQueue ? 1 : 0)
                    + c.OverrideProperties.Count + c.EnabledKeywords.Count + c.DisabledKeywords.Count;
         }
 
         // Recorded properties that the material's shader does not have; they are skipped when applying
-        public static List<string> GetMissingProperties(Material material, MaterialOverrideComponent c)
+        public static List<string> GetMissingProperties(Material material, MaterialOverrideBase c)
         {
             return c.OverrideProperties
                 .Where(p => !material.HasProperty(p.PropertyName))
