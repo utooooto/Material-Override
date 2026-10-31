@@ -12,6 +12,8 @@
 - **不限 shader**：不綁定 lilToon。也可以從另一個材質複製選定的屬性。
 - **需求**：Unity 2022.3 與 NDMF 1.13.1 以上。與 TexTransTool（TTT）的相容性尚未驗證。
 
+![同一個 Avatar，Material Override 停用與啟用的對照](Documentation~/images/before-after.png)
+
 安裝方式：把 [安裝](#安裝) 一節說明的 VPM 倉庫加到 VCC 或 ALCOM。
 
 ## 快速開始
@@ -19,6 +21,8 @@
 1. 在有 Renderer 的 GameObject 上加 **Material Slot Override** 並選擇 **Slot**，或在任何 GameObject 上加 **Material Override** 並選擇 **Target Material**。兩者都在 Add Component 選單的 **Uto** 分類裡。
 2. 在 Inspector 顯示的材質面板中修改想改的內容。只有你改過的部分會被記錄。
 3. 照常建置或上傳。想先確認結果，可以看場景裡 NDMF 的預覽。
+
+![Inspector 中的 Material Slot Override](Documentation~/images/slot-override-inspector.png)
 
 ## 需求
 
@@ -65,6 +69,8 @@ Material Override 比對的是槽位的**原始**材質，而不是前一層的�
 
 Inspector 的 **Applied before this component** 會顯示這個元件之前的各層，以及它們改了什麼。材質面板以那個結果為起點，你的修改是相對於它記錄的。
 
+![Avatar 根物件上的 Material Override（左）與它底下某個子物件上的 Material Slot Override（右）](Documentation~/images/layering.png)
+
 輸入相同的槽位在同一層會共用同一份結果材質。多了一層，或上層不同的槽位則各自擁有自己的複本。
 
 ## 可以覆寫的內容
@@ -93,6 +99,8 @@ Inspector 的 **Advanced** 區塊有：
 - **Transfer from Another Material...**：選擇來源材質，把選取的屬性複製到記錄的差異中。適合自帶貼圖的預設。
 - **Bake as New Material...**：把結果（這個元件之前的層加上這一層）存成新的材質資產。元件會保留。
 - **Bake into Original Material**：把差異寫進原始材質資產並移除元件。這會改變所有使用該材質的物件。無法編輯的材質（在模型檔或套件內），以及這個元件之前還有其他層時，這個按鈕會停用。
+
+![轉移視窗](Documentation~/images/transfer-window.png)
 
 ## 語言
 

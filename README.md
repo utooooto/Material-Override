@@ -20,6 +20,8 @@ from the original, and the changes are applied when the avatar is built (NDMF).
 - **Requires** Unity 2022.3 and NDMF 1.13.1 or newer. Compatibility with TexTransTool (TTT) has not been
   verified.
 
+![The same avatar with Material Override disabled and enabled](Documentation~/images/before-after.png)
+
 To install, add the VPM repository described under [Installation](#installation) to VCC or ALCOM.
 
 ## Quick start
@@ -29,6 +31,8 @@ To install, add the VPM repository described under [Installation](#installation)
    Component menu.
 2. Change what you want in the material panel the inspector shows. Only your changes are recorded.
 3. Build or upload as usual. To check the result first, look at NDMF's preview in the scene.
+
+![Material Slot Override in the inspector](Documentation~/images/slot-override-inspector.png)
 
 ## Requirements
 
@@ -85,6 +89,8 @@ earlier layer never changes which components apply.
 The inspector shows **Applied before this component**: the layers before this one and what they change. The
 material panel starts from that result, and your changes are recorded relative to it.
 
+![A Material Override on the avatar root (left) and a Material Slot Override on one of its children (right)](Documentation~/images/layering.png)
+
 Slots that reach a layer with the same input share one copy of the resulting material. A slot with an extra
 layer, or different layers above it, gets its own copy.
 
@@ -125,6 +131,8 @@ The **Advanced** section of the inspector has:
 - **Bake into Original Material**: write the differences into the original material asset and remove the
   component. This changes every object that uses that material. It is disabled for materials that cannot be
   edited (inside a model file or a package) and when other layers apply before this one.
+
+![The transfer window](Documentation~/images/transfer-window.png)
 
 ## Languages
 
