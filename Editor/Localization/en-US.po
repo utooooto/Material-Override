@@ -86,9 +86,6 @@ msgstr "{0}  (diff {1} / selected {2} / shown {3})"
 msgid "no_rows"
 msgstr "No properties match the current filters."
 
-msgid "using_fallback"
-msgstr "Could not read the installed lilToon source; using the built-in group table."
-
 msgid "kind_texture"
 msgstr "Texture"
 

@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 // Property groups for lilToon, parsed from the installed lilMaterialProperties.cs.
-// Falls back to LilToonPropertyGroupsFallback when the source cannot be found or parsed.
+// When lilToon is not installed or its source cannot be parsed there are no groups, and the
+// transfer window lists every property in its "Other" group.
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -15,30 +16,25 @@ public static class LilToonPropertyGroups
     private static readonly Regex BlockRegex = new Regex(@"PropertyBlock\.(\w+)", RegexOptions.Compiled);
 
     private static bool _loaded;
-    private static bool _usingFallback;
-    private static string[] _groupOrder;
-    private static Dictionary<string, string[]> _children;
-    private static Dictionary<string, (string group, string sub, int order)> _map;
-
-    public static bool UsingFallback { get { Load(); return _usingFallback; } }
+    private static string[] _groupOrder = new string[0];
+    private static Dictionary<string, string[]> _children = new Dictionary<string, string[]>();
+    private static Dictionary<string, (string group, string sub, int order)> _map =
+        new Dictionary<string, (string group, string sub, int order)>();
 
     public static string[] GroupOrder
     {
-        get { Load(); return _usingFallback ? LilToonPropertyGroupsFallback.GroupOrder : _groupOrder; }
+        get { Load(); return _groupOrder; }
     }
 
     public static string[] ChildrenOf(string group)
     {
         Load();
-        if (_usingFallback) return LilToonPropertyGroupsFallback.ChildrenOf(group);
         return _children.TryGetValue(group, out var c) ? c : new string[0];
     }
 
     public static bool TryGet(string propertyName, out string group, out string sub, out int order)
     {
         Load();
-        if (_usingFallback)
-            return LilToonPropertyGroupsFallback.TryGet(propertyName, out group, out sub, out order);
         if (_map.TryGetValue(propertyName, out var e))
         {
             group = e.group; sub = e.sub; order = e.order;
@@ -52,7 +48,7 @@ public static class LilToonPropertyGroups
     {
         if (_loaded) return;
         _loaded = true;
-        _usingFallback = !TryParse();
+        TryParse();
     }
 
     private static string FindSource()

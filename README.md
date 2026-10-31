@@ -14,8 +14,8 @@ components all see the final material.
 
 - Unity 2022.3
 - [NDMF](https://ndmf.nadena.dev/) 1.13.1 or newer
-- lilToon is optional. When it is installed, the transfer window groups properties the way lilToon's material
-  inspector does.
+- lilToon is optional. The transfer window works with any shader. When lilToon is installed, it groups the
+  properties the way lilToon's material inspector does; otherwise every property is listed under **Other**.
 
 ## Installation
 
@@ -117,5 +117,4 @@ A missing key falls back to English.
 
 ## License
 
-[MIT](LICENSE). The fallback property table includes data derived from lilToon, also MIT; see
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+[MIT](LICENSE).

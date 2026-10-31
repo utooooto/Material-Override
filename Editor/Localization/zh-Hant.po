@@ -86,9 +86,6 @@ msgstr "{0}  (差異 {1} / 已選 {2} / 顯示 {3})"
 msgid "no_rows"
 msgstr "目前篩選條件下沒有屬性。"
 
-msgid "using_fallback"
-msgstr "讀不到已安裝的 lilToon 原始碼，改用內建分組表。"
-
 msgid "kind_texture"
 msgstr "貼圖"
 

@@ -427,9 +427,6 @@ public class MaterialOverrideWindow : EditorWindow
         if (_builtSource != _source || _builtTarget != _target)
             Rebuild();
 
-        if (LilToonPropertyGroups.UsingFallback)
-            EditorGUILayout.HelpBox(T("using_fallback"), MessageType.Info);
-
         if (_source == null || _target == null)
         {
             EditorGUILayout.HelpBox(T(_source == null ? "win_pick_source" : "win_pick_target"), MessageType.Info);
