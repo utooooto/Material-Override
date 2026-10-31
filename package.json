@@ -1,0 +1,21 @@
+{
+  "name": "dev.uto.material-override",
+  "displayName": "Material Override",
+  "version": "0.1.0",
+  "unity": "2022.3",
+  "description": "NDMF components that record a material as a set of differences and apply them at build time, without creating or modifying material assets. Material Override applies to every slot below a GameObject that uses a target material; Material Slot Override applies to one slot of one renderer. Layers stack from the widest scope to the narrowest, and animations that point at the original material follow.",
+  "author": {
+    "name": "utooooto"
+  },
+  "license": "MIT",
+  "keywords": [
+    "NDMF",
+    "Modular Avatar",
+    "Material",
+    "lilToon",
+    "VRChat"
+  ],
+  "vpmDependencies": {
+    "nadena.dev.ndmf": ">=1.13.1"
+  }
+}
