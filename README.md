@@ -22,6 +22,14 @@ from the original, and the changes are applied when the avatar is built (NDMF).
 
 To install, add the VPM repository described under [Installation](#installation) to VCC or ALCOM.
 
+## Quick start
+
+1. Add **Material Slot Override** to a GameObject with a renderer and pick the **Slot**, or add **Material
+   Override** to any GameObject and pick the **Target Material**. Both are in the **Uto** section of the Add
+   Component menu.
+2. Change what you want in the material panel the inspector shows. Only your changes are recorded.
+3. Build or upload as usual. To check the result first, look at NDMF's preview in the scene.
+
 ## Requirements
 
 - Unity 2022.3
@@ -130,6 +138,11 @@ A missing key falls back to English.
   runs last.
 - A texture is compared by reference, so two different assets with identical content count as a difference.
 - A property whose type differs between shaders is not checked; setting it uses the type that was recorded.
+
+## Feedback
+
+Report problems and suggestions in [GitHub Issues](https://github.com/utooooto/Material-Override/issues).
+Please include your Unity and NDMF versions and, for a build problem, the message from the console.
 
 ## License
 

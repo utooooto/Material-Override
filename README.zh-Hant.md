@@ -14,6 +14,12 @@
 
 安裝方式：把 [安裝](#安裝) 一節說明的 VPM 倉庫加到 VCC 或 ALCOM。
 
+## 快速開始
+
+1. 在有 Renderer 的 GameObject 上加 **Material Slot Override** 並選擇 **Slot**，或在任何 GameObject 上加 **Material Override** 並選擇 **Target Material**。兩者都在 Add Component 選單的 **Uto** 分類裡。
+2. 在 Inspector 顯示的材質面板中修改想改的內容。只有你改過的部分會被記錄。
+3. 照常建置或上傳。想先確認結果，可以看場景裡 NDMF 的預覽。
+
 ## 需求
 
 - Unity 2022.3
@@ -97,6 +103,10 @@ Inspector 的 **Advanced** 區塊有：
 - 尚未驗證與 TTT 的相容性。如果兩者改了同一個屬性，結果取決於誰最後執行。
 - 貼圖是以參照比較，所以內容相同但資產不同的兩張貼圖會被視為有差異。
 - 屬性型別在不同 shader 間不一致時不會檢查，設定時使用記錄當時的型別。
+
+## 回饋
+
+問題與建議請到 [GitHub Issues](https://github.com/utooooto/Material-Override/issues) 回報。請附上 Unity 與 NDMF 的版本；建置問題請附上 Console 的訊息。
 
 ## 授權
 
